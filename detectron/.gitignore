@@ -23,7 +23,4 @@ detectron/datasets/data/*
 # Generated C files
 detectron/utils/cython_*.c
 cscope*
-*.jpeg
-*.jpg
-*.png
 
