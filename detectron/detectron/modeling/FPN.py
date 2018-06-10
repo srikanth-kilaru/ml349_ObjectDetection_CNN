@@ -29,7 +29,6 @@ from detectron.utils.c2 import const_fill
 from detectron.utils.c2 import gauss_fill
 from detectron.utils.net import get_group_gn
 import detectron.modeling.ResNet as ResNet
-import detectron.modeling.Inception_ResNetv2 as Inception
 import detectron.utils.blob as blob_utils
 import detectron.utils.boxes as box_utils
 
@@ -43,12 +42,6 @@ HIGHEST_BACKBONE_LVL = 5  # E.g., "conv5"-like level
 # ---------------------------------------------------------------------------- #
 # FPN with ResNet
 # ---------------------------------------------------------------------------- #
-
-def add_fpn_Inception_Resnetv2_conv5_body(model):
-    return add_fpn_onto_conv_body(
-        model, Inception.add_inception_resnetv2_xxs_conv5_body,
-        fpn_level_info_Inception_conv5
-    )
 
 def add_fpn_ResNet50_conv5_body(model):
     return add_fpn_onto_conv_body(
@@ -331,16 +324,10 @@ def add_fpn_rpn_outputs(model, blobs_in, dim_in, spatial_scales):
     """Add RPN on FPN specific outputs."""
     num_anchors = len(cfg.FPN.RPN_ASPECT_RATIOS)
     dim_out = dim_in
-    '''
+
     k_max = cfg.FPN.RPN_MAX_LEVEL  # coarsest level of pyramid
     k_min = cfg.FPN.RPN_MIN_LEVEL  # finest level of pyramid
-    '''
-    k_max = 5 # coarsest level of pyramid
-    k_min = 2  # finest level of pyramid
-    print(len(blobs_in))
-    print(k_max - k_min + 1)
-    #assert len(blobs_in) == k_max - k_min + 1
-
+    assert len(blobs_in) == k_max - k_min + 1
     for lvl in range(k_min, k_max + 1):
         bl_in = blobs_in[k_max - lvl]  # blobs_in is in reversed order
         sc = spatial_scales[k_max - lvl]  # in reversed order
@@ -453,7 +440,7 @@ def add_fpn_rpn_outputs(model, blobs_in, dim_in, spatial_scales):
 def add_fpn_rpn_losses(model):
     """Add RPN on FPN specific losses."""
     loss_gradients = {}
-    for lvl in range(2, 5):
+    for lvl in range(cfg.FPN.RPN_MIN_LEVEL, cfg.FPN.RPN_MAX_LEVEL + 1):
         slvl = str(lvl)
         # Spatially narrow the full-sized RPN label arrays to match the feature map
         # shape
@@ -555,13 +542,6 @@ FpnLevelInfo = collections.namedtuple(
     'FpnLevelInfo',
     ['blobs', 'dims', 'spatial_scales']
 )
-
-def fpn_level_info_Inception_conv5():
-    return FpnLevelInfo(
-        blobs=('inception_4a-output', 'inception_3b-output', 'inception_3a-output'),
-        dims=(512, 256, 128),
-        spatial_scales=(1. / 16., 1. / 8., 1. / 4.)
-    )
 
 
 def fpn_level_info_ResNet50_conv5():

@@ -1,6 +1,6 @@
 MODEL:
   TYPE: generalized_rcnn
-  CONV_BODY: FPN.add_fpn_Inception_Resnetv2_conv5_body
+  CONV_BODY: Inception_ResNetv2.add_inception_resnetv2_xxs_conv5_body
   NUM_CLASSES: 81
   FASTER_RCNN: True
   MASK_ON: True # See if this resolves the inference issue
@@ -30,7 +30,7 @@ SOLVER:
   #   MAX_ITER: 7500
   #   STEPS: [0, 3750, 5000]
 FPN:
-  FPN_ON: True 
+  FPN_ON: False 
   MULTILEVEL_ROIS: True
   MULTILEVEL_RPN: True
   USE_GN: True  # Note: use GN on the FPN-specific layers
