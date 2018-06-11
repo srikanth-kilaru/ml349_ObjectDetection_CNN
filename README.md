@@ -7,18 +7,18 @@ Northwestern University ME 349: Machine Learning (Spring 2018)
 
 Object detection is the process of finding instances of real-world objects such as faces, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. It is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry. Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
 
-## Task
+### Task
 We leveraged the modular nature of the Detectron code base to replace the default backbone from ResNet50 / ResNet101 to a backbone that is not already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 CNN to the model zoo, which was implemented in python utilizing Caffe2, and tested the object detection and segmentation capabilities of the model when trained on the PASCAL VOC 2012 & MS COCO dataset. Inference produces images that are overlaid with segmentation mask and bounding box of the object instances along with their classification and associated confidence level.
 
-## Results
-Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the (srikanth fill the right word here) thresh, from a default of 0.7 to 0.3, and the keypoint threshold from a default of 2 to 0. This shows that the algorithm is tuned to throw away low qaulity inferences. In addition the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference.
+### Results
+Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [this folder](detectron/detectron-visualizations/inception-inference-coco). 
 
 
 ## Further background and Detailed Report
 
 Deep Learning (CNN) architectures such as AlexNet, VGG, Resnet and Inception have proven to be very successful in image classification tasks. However they were not particularly useful for object detection. A key advance in the area of object detection and segmentation has been the work done by some researchers who now work at Facebook.
 
-To increase the accuracy and performance of object detection algorithms, these researchers, introduced a Region Proposal Network (RPN) that shares full-image
+To increase the accuracy and performance of object detection algorithms, these researchers, introduced a Region of Interest (ROI) Proposal Network (RPN) that shares full-image
 convolutional features with the main detection network (also refered to as the 'backbone'), thus enabling nearly cost-free region proposals. An RPN is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position. The RPN is trained end-to-end to generate high-quality region proposals, and then merge the RPN and CNN into a single network by sharing their convolutional features. The RPN portion tells the unified network where to look.
 
 A further enhancement made in the last 18 months was the development of the FPN. 
@@ -47,7 +47,11 @@ Some sample images with object detection and segmentation working very marginall
 For trying out inference with your own set of images, you can use the weights from the trained model located at ().
 
 ## Future Work
-In the future we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
+This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
+If time permitting, in the future we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
+
+## Primary Areas of contribution
+Srikanth Kilaru - Adding Inception backbone to Detectron
 
 ## Setup and Installation Instructions
 
