@@ -31,6 +31,8 @@ The modular nature of the Detectron code base enabled us to replace the default 
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Hence we had to turn off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset and PASCAL VOC 2012 is marginal.
 Please see the below table for the Mean Average Precision when Inception was trained and validated on the COCO dataset using the rules of the COCO website.
 
+![coco-ap](detectron/detectron-visualizations/Coco_AP.png)
+
 Here is a list of files added and changed in the Detectron code base -
 
 - 8 GPU version of the config YAML file [ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
@@ -139,7 +141,8 @@ From the [Deep Residual Learning for Image Recognition](https://www.cv-foundatio
 
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition (CVPR)](https://youtu.be/C6tLw-rPQ2o), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased (figure above to the right).
 Thus, it would be logical to assume that for the 5 different backbones mentioned above, ResNet-101 should be a bit better than ResNet-50, which should outperform Inception which should beat VGG_M_CNN_1024, leaving VGG_16 in last place. 
-
+![table](detectron/detectron-visualizations/table.png)
+![map](detectron/detectron-visualizations/Pascal_mAP.png)
 ![backbone-plot](detectron/detectron-visualizations/plot.png)
 
 From the data shown above, this trend can be clearly seen to a certain extent. Both ResNet-50-FPN and ResNet-101-FPN are higher than the other backbones. Inception is in third placed followed by the two VGGs in the order we predicted. Furthermore, the ResNet-50-C4 backbone (called 'C4' as features were extracted from the final convolutional layer of the 4th stage) ranked the least among the ResNet models according to the [Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) paper by Kaiming He, et al which can be seen in the plot above as well. The only oddity is that ResNet-101-FPN is not higher than ResNet-50_FPN. Perhaps, if the models had more time to train, this phenomenon would not have occured.
