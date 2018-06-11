@@ -1,7 +1,11 @@
 # Object Detection and Segmentation using different Backbone Architectures and training Datasets
 **Team Members: Srikanth Kilaru, Michael Wiznitzer, Solomon Wiznitzer**
 
-Northwestern University ME 349: Machine Learning (Spring 2018)
+Northwestern University EECS 349: Machine Learning (Spring 2018)
+
+## Primary Areas of contribution
+Srikanth Kilaru - Adding Inception backbone to Detectron
+Michael & Solomon Wiznitzer - Training six different backbones and comparing results
 
 ## Abstract
 
@@ -57,52 +61,6 @@ Some sample images with object detection and segmentation NOT working correctly 
 Some sample images with object detection and segmentation working very marginally or missing detection of significant (number of) objects in the image -
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 5: Detectron+Inception output missing several key points including people, automobiles and cycles. It gets a portion of the motorcycle right</p> </div>
-
-## Primary Areas of contribution
-Srikanth Kilaru - Adding Inception backbone to Detectron
-Michael & Solomon Wiznitzer - Training six different backbones and comparing results
-## Setup and Installation Instructions
-
-### Setting up the GPU enabled VM on Google Cloud Platform (GCP)
-
-One of the requirements of Detectron is to use a machine with NVIDIA GPUs. To gain access to this resource, we each created free accounts on [Google Cloud](https://cloud.google.com/) using our *personal* email addresses and credit cards. Unfortunately, the free version (although it does give $300 credit for the first year) does not allow access to GPUs so we upgraded our accounts, albeit at no up front charge. We then followed the instructions [here](https://cloud.google.com/compute/quotas) to get access to 8 up to K80 GPUs.
-
-After creating a project, we then made a VM Instance with the following settings:
-* **Zone:** us-central or us-west
-* **Machine type:**
-    * *Cores:* 4 vCPUs
-    * *Memory:* 20 GB memory
-    * *GPU:* 1,2, or 8 K80 GPUS
-* **Boot Disk:** 
-    * *OS Image:* Ubuntu 16.04 LTS
-    * *Boot Disk Type:* Standard persistent disk
-    * *Size:* 500 GB
-* **Firewalls** - Allow HTTP and HTTPS traffic
-
-*Note: During the course of the project, we used either 1, 2, or 8 GPU K80s for model training. Addtionally, we chose to use Ubuntu Linux 16.04 as the OS image since all of us are familiar with it. Finally, we decided to use a standard persistent disk with 500 GB storage since this was cheaper than a solid-state drive and would be able to store the [PASCAL VOC image dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html#devkit) as well as the [COCO dataset](http://cocodataset.org/#download).*
-
-Finally, we installed the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu) on our *local* machines and followed the instructions [here](https://cloud.google.com/sdk/gcloud/reference/compute/scp) so that we could copy files (specifically classified/inferred images) from the VM to our laptops.
-
-### Detectron
-
-After booting up the VM instance, we followed the directions outlined in [Detectron's repo](detectron/INSTALL.md) to install [Caffe2](https://caffe2.ai/docs/getting-started.html?platform=ubuntu&configuration=compile) from source, some standard Python packages, and the COCO API. During installation, we found (after countless hours of debugging) some issues that we fixed as follows:
-* In the 'Install Dependencies' section on the Caffe2 'Install' page, we added `python-setuptools` to the `sudo apt-get install` command.
-* In the 'Install cuDNN (all Ubuntu versions) section on the Caffe2 'Install' page, instead of registering to get the Version 6.0, we just switched all appearances of `v5.1` in the gray command window to `v6.0` which worked just fine.
-* When doing the `sudo make install` in the 'Clone & Build' section of the Caffe2 'Install' page, we added the flag `-DUSE_MPI=OFF` so that the final command was `sudo make install -DUSE_MPI=OFF`.
-* After the installation (which took a little over an hour), but before checking to see if the Caffe2 installation was successful, we edited the `bash.rc` file to update the `PYTHONPATH` environment variable to `export PYTHONPATH="/home/<user>/pytorch/build/"`
-
-The above tweaks took many hours to figure out but once completed, the check to determine whether or not Caffe2 installed properly outputted 'Success'.
-
-### VNCServer
-
-In order to easily browse the internet for image datasets and look through the Home Folder, we installed a VNCserver by following the instructions [here](https://cloudcone.com/docs/article/install-desktop-vnc-ubuntu-16-04/). For clients, we just installed any VNC client like the Remmina Remote desktop client, VNCViewer, or KRDC.
-
-Also, we made a firewall rule in the GCP to allow communication between the server and the client as outlined in the 'Open the firewall' section [here](https://medium.com/google-cloud/graphical-user-interface-gui-for-google-compute-engine-instance-78fccda09e5c).
-
-### Initial Test
-
-For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone on some test images provided by Detectron as well as an image we randomly found online. We ran the code shown under option 1 [here](/detectron/GETTING_STARTED.md). The result which correctly classified a number of people, a tie, a car, and a chair can be seen below.
-![rand-test](detectron/detectron-visualizations/people_ex.png)
 
 ## Backbone Exploration 
 One of our main goals was to investigate the effect of using various backbone network architectures during training and see how the Average Precision values are reflected based off of that. The backbones utilized in this project include both existing ones in the Detectron [package](detectron/README.md) as well as the Google Inception backbone mentioned above. The are listed below:
@@ -160,7 +118,7 @@ From the [Deep Residual Learning for Image Recognition](https://www.cv-foundatio
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition (CVPR)](https://youtu.be/C6tLw-rPQ2o), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased (figure above to the right).
 Thus, it would be logical to assume that for the 5 different backbones mentioned above, ResNet-101 should be a bit better than ResNet-50, which should outperform Inception which should beat VGG_M_CNN_1024, leaving VGG_16 in last place.
 <div align="center"> 
-<img src=detectron/detectron-visualizations/table.png>
+<img src="detectron/detectron-visualizations/table.png">
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 <img src="detectron/detectron-visualizations/plot.png">
 </div>
@@ -169,3 +127,44 @@ From the data shown above, this trend can be clearly seen to a certain extent. B
 ## Future Work
 This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
 In the future, we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
+
+### Setting up the GPU enabled VM on Google Cloud Platform (GCP)
+
+One of the requirements of Detectron is to use a machine with NVIDIA GPUs. To gain access to this resource, we each created free accounts on [Google Cloud](https://cloud.google.com/) using our *personal* email addresses and credit cards. Unfortunately, the free version (although it does give $300 credit for the first year) does not allow access to GPUs so we upgraded our accounts, albeit at no up front charge. We then followed the instructions [here](https://cloud.google.com/compute/quotas) to get access to 8 up to K80 GPUs.
+
+After creating a project, we then made a VM Instance with the following settings:
+* **Zone:** us-central or us-west
+* **Machine type:**
+    * *Cores:* 4 vCPUs
+    * *Memory:* 20 GB memory
+    * *GPU:* 1,2, or 8 K80 GPUS
+* **Boot Disk:** 
+    * *OS Image:* Ubuntu 16.04 LTS
+    * *Boot Disk Type:* Standard persistent disk
+    * *Size:* 500 GB
+* **Firewalls** - Allow HTTP and HTTPS traffic
+
+*Note: During the course of the project, we used either 1, 2, or 8 GPU K80s for model training. Addtionally, we chose to use Ubuntu Linux 16.04 as the OS image since all of us are familiar with it. Finally, we decided to use a standard persistent disk with 500 GB storage since this was cheaper than a solid-state drive and would be able to store the [PASCAL VOC image dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html#devkit) as well as the [COCO dataset](http://cocodataset.org/#download).*
+
+Finally, we installed the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu) on our *local* machines and followed the instructions [here](https://cloud.google.com/sdk/gcloud/reference/compute/scp) so that we could copy files (specifically classified/inferred images) from the VM to our laptops.
+
+### Detectron
+
+After booting up the VM instance, we followed the directions outlined in [Detectron's repo](detectron/INSTALL.md) to install [Caffe2](https://caffe2.ai/docs/getting-started.html?platform=ubuntu&configuration=compile) from source, some standard Python packages, and the COCO API. During installation, we found (after countless hours of debugging) some issues that we fixed as follows:
+* In the 'Install Dependencies' section on the Caffe2 'Install' page, we added `python-setuptools` to the `sudo apt-get install` command.
+* In the 'Install cuDNN (all Ubuntu versions) section on the Caffe2 'Install' page, instead of registering to get the Version 6.0, we just switched all appearances of `v5.1` in the gray command window to `v6.0` which worked just fine.
+* When doing the `sudo make install` in the 'Clone & Build' section of the Caffe2 'Install' page, we added the flag `-DUSE_MPI=OFF` so that the final command was `sudo make install -DUSE_MPI=OFF`.
+* After the installation (which took a little over an hour), but before checking to see if the Caffe2 installation was successful, we edited the `bash.rc` file to update the `PYTHONPATH` environment variable to `export PYTHONPATH="/home/<user>/pytorch/build/"`
+
+The above tweaks took many hours to figure out but once completed, the check to determine whether or not Caffe2 installed properly outputted 'Success'.
+
+### VNCServer
+
+In order to easily browse the internet for image datasets and look through the Home Folder, we installed a VNCserver by following the instructions [here](https://cloudcone.com/docs/article/install-desktop-vnc-ubuntu-16-04/). For clients, we just installed any VNC client like the Remmina Remote desktop client, VNCViewer, or KRDC.
+
+Also, we made a firewall rule in the GCP to allow communication between the server and the client as outlined in the 'Open the firewall' section [here](https://medium.com/google-cloud/graphical-user-interface-gui-for-google-compute-engine-instance-78fccda09e5c).
+
+### Initial Test
+
+For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone on some test images provided by Detectron as well as an image we randomly found online. We ran the code shown under option 1 [here](/detectron/GETTING_STARTED.md). The result which correctly classified a number of people, a tie, a car, and a chair can be seen below.
+![rand-test](detectron/detectron-visualizations/people_ex.png)
