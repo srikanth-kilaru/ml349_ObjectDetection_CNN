@@ -5,10 +5,11 @@ Northwestern University ME 349: Machine Learning (Spring 2018)
 
 ## Abstract
 
-Object detection is the process of finding instances of real-world objects such as faces, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. It is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry. Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
+Object detection is the process of finding instances of real-world objects such as people, cars, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. Object detection is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry. Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
 
 ### Task
 We leveraged the modular nature of the Detectron code base to replace the default backbone from ResNet50 / ResNet101 to a backbone that is not already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 CNN to the model zoo, which was implemented in python utilizing Caffe2, and tested the object detection and segmentation capabilities of the model when trained on the PASCAL VOC 2012 & MS COCO dataset. Inference produces images that are overlaid with segmentation mask and bounding box of the object instances along with their classification and associated confidence level.
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person is almost blended with motorcycle.</p> </div>
 
 ### Results
 Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [this folder](detectron/detectron-visualizations/inception-inference-coco). 
@@ -41,8 +42,6 @@ Code that calls the function to add Inception Conv layers[model_builder.py](dete
 For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person is almost blended with motorcycle.</p> </div>
-
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Detectron+Inception output showing persons and a car</p> </div>
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/15673749081_767a7fa63a_k.jpg" width="700px" /> <p>Example 3: Detectron+Inception output showing several persons on the deck but misses the boats</p> </div>
