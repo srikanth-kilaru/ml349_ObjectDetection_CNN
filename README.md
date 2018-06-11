@@ -91,25 +91,14 @@ Also, we made a firewall rule in the GCP to allow communication between the serv
 
 For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone on some test images provided by Detectron as well as an image we randomly found online. We ran the code shown under option 1 [here](/detectron/GETTING_STARTED.md). The result which correctly classified a number of people, a tie, a car, and a chair can be seen below.
 ![rand-test](detectron/detectron-visualizations/people_ex.png)
-## Streams 1 and 2
 
-### <u>Stream 1</u>
-
-#### Development and Implementation
-
-#### Results and Analysis
-
-### <u>Stream 2</u>
-
-#### Development and Implementation
-
-#### Results and Analysis
-
-##### Resnet vs. VGG vs. Inception
+## Resnet vs. VGG vs. Inception
 ![backbone-model](detectron/detectron-visualizations/backbone-model.png)
+
 *Bar graph showing ResNet's superiority over VGG and Inception among others*
 From the paper titled [*Deep Residual Learning for Image Recognition*](https://arxiv.org/pdf/1512.03385.pdf) by Kaiming He, et al, the authors describe that in theory, a neural network should have reduced training error as the number of layers inrease. This is because  increased depth enables the network more opportunity to learn complex features. While this is true to a certain extent (VGG16 outperforms an AlexNet due to having multiple layers of 3x3 convolution filters), it is not completely accurate. Rather, a 'plain' network (similar to VGG) tends to inrease in training error if the number of layers is too big. In contrast, training error continues to decrease as the number of layers increase by ResNet. To achieve this, a 'shortcut' is created between an input to a hidden layer and right before an output a second layer down (as shown in the image below).
 ![residual](detectron/detectron-visualizations/residual.png)
+
 *Explanation of ResNet residual*
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition](https://www.youtube.com/watch?v=C6tLw-rPQ2o) (CVPR), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased.
 ![resnet-comparison](detectron/detectron-visualizations/resnet-comparison)
