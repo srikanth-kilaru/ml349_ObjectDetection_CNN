@@ -38,7 +38,7 @@ Main file with Inception Conv layers [Inception_ResNetv2.py](detectron/detectron
 
 Code that calls the function to add Inception Conv layers[model_builder.py](detectron/detectron/modeling/model_builder.py)
 
-For your own inference you can download the pkl file with the weights trained usign Inception on COCO dataset [from here](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
+For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person is almost blended with motorcycle.</p> </div>
@@ -54,8 +54,6 @@ Some sample images with object detection and segmentation NOT working correctly 
 Some sample images with object detection and segmentation working very marginally or missing detection of significant (number of) objects in the image -
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 5: Detectron+Inception output missing several key points including people, automobiles and cycles. It gets a portion of the motorcycle right</p> </div>
-
-For trying out inference with your own set of images, you can use the weights from the trained model located at ().
 
 ## Future Work
 This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
