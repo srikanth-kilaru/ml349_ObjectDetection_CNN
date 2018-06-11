@@ -56,13 +56,9 @@ Some sample images with object detection and segmentation working very marginall
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 5: Detectron+Inception output missing several key points including people, automobiles and cycles. It gets a portion of the motorcycle right</p> </div>
 
-## Future Work
-This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
-If time permitting, in the future we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
-
 ## Primary Areas of contribution
 Srikanth Kilaru - Adding Inception backbone to Detectron
-
+Michael & Solomon Wiznitzer - Training six different backbones and comparing results
 ## Setup and Installation Instructions
 
 ### Setting up the GPU enabled VM on Google Cloud Platform (GCP)
@@ -148,5 +144,6 @@ Thus, it would be logical to assume that for the 5 different backbones mentioned
 
 From the data shown above, this trend can be clearly seen to a certain extent. Both ResNet-50-FPN and ResNet-101-FPN are higher than the other backbones. Inception is in third placed followed by the two VGGs in the order we predicted. Furthermore, the ResNet-50-C4 backbone (called 'C4' as features were extracted from the final convolutional layer of the 4th stage) ranked the least among the ResNet models according to the [Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) paper by Kaiming He, et al which can be seen in the plot above as well. The only oddity is that ResNet-101-FPN is not higher than ResNet-50_FPN. Perhaps, if the models had more time to train, this phenomenon would not have occured.
 
-## Conclusion
-
+## Future Work
+This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
+In the future, we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
