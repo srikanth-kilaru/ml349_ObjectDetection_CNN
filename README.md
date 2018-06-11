@@ -125,7 +125,25 @@ This is by far a much bigger dataset with many more categories than the [COCO](h
 
 In order to accomplish this, we needed to get Open Image's annotation files to be in the right format - specifically COCO's [JSON format](http://cocodataset.org/#format-data). This proved to be rather difficult since Open Image's annotations are in csv format and are annotated differently than COCO's. Furthermre, after spending much time following a [tutorial](https://blog.algorithmia.com/deep-dive-into-object-detection-with-open-images-using-tensorflow/) to convert the annotation files into JSON format, we learned that one - the JSON files we obtained were still not in COCO's JSON format, and two - that we also had to watch out for corrupted or missing image/annotation files. It was at this point where we decided to try working with a different dataset that fits COCO's annotation format.
 
-We briefly investigated using the [Cityscapes](https://www.cityscapes-dataset.com/)
+We briefly investigated using the [Cityscapes](https://www.cityscapes-dataset.com/) dataset (that contains many pictures of many city streets around the world), which Detectron is currently working on to create baselines for in addition to converted annotations that are in COCO JSON format. However, this proved to be time consuming as well due to inconsistencies in the annotation format. As such, we decided to use the PASCAL VOC2012 dataset for training and testing since already converted COCO-friendly annotation files have already been made available on COCO's website [here](http://cocodataset.org/#external).
+
+The PASCAL VOC dataset consists of 20 categories listed below, made up of training and validaiton images:
+- Person: person
+- Animal: bird, cat, cow, dog, horse, sheep
+- Vehicle: aeroplane, bicycle, boat, bus, car, motorbike, train
+- Indoor: bottle, chair, dining table, potted plant, sofa, tv/monitor
+
+In order to make these images available to Detectron to be used for training, the images, annotations, and VOCdevkit 2012 directories were structured as described in Detectron's dataset [Readme](https://github.com/facebookresearch/Detectron/tree/master/detectron/datasets/data).
+
+Finally, the config files were made for each backbone which are linked below:
+- [Resnet 50 with FPN head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-50-FPN.yaml) - 8 GPU
+- [Resnet 50 with C4 head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-50-C4.yaml) - 8 GPU
+- [Resnet 101 with FPN head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-101-FPN.yaml) - 8 GPU
+- [VGG16](detectron/configs/ml349_8gpu_e2e_faster_rcnn_VGG_16.yaml) - 8 GPU
+- [VGG_CNN_M_1024](detectron/configs/ml349_8gpu_e2e_faster_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
+- [Google Inception_Resnet_v2](detectron/configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
+
+The existing backbone config files were made keeping a short learning schedule in mind in the interest of time and money.
 
 ## Resnet vs. VGG vs. Inception
 <p align="center">
