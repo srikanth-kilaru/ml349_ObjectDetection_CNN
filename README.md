@@ -73,7 +73,7 @@ One of our main goals was to investigate the effect of using various backbone ne
 - VGG_CNN_M_1024
 - Google Inception_Resnet_v2
 
-### Dataset Acquisition
+### Dataset Acquisition and Training Implementation
 The original goal was to test these backbones on the [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) dataset which boasts:
 - Over 19,500 classes of objects
 - Over 9 million annoated images
@@ -96,14 +96,14 @@ The PASCAL VOC dataset consists of 20 categories listed below, made up of traini
 In order to make these images available to Detectron to be used for training, the images, annotations, and VOCdevkit 2012 directories were structured as described in Detectron's dataset [Readme](https://github.com/facebookresearch/Detectron/tree/master/detectron/datasets/data).
 
 Finally, the config files were made for each backbone which are linked below:
-- [Resnet 50 with FPN head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-50-FPN.yaml) - 8 GPU
-- [Resnet 50 with C4 head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-50-C4.yaml) - 8 GPU
-- [Resnet 101 with FPN head](detectron/configs/ml349_8gpu_e2e_faster_rcnn_R-101-FPN.yaml) - 8 GPU
-- [VGG16](detectron/configs/ml349_8gpu_e2e_faster_rcnn_VGG_16.yaml) - 8 GPU
-- [VGG_CNN_M_1024](detectron/configs/ml349_8gpu_e2e_faster_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
-- [Google Inception_Resnet_v2](detectron/configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
+- [Resnet 50 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-50-FPN.yaml) - 8 GPU
+- [Resnet 50 with C4 head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-50-C4.yaml) - 8 GPU
+- [Resnet 101 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-101-FPN.yaml) - 8 GPU
+- [VGG16](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_VGG_16.yaml) - 8 GPU
+- [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
+- [Google Inception_Resnet_v2](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
 
-The existing backbone config files were made keeping a short learning schedule in mind in the interest of time and money.
+The existing backbone config files were made for training keeping a short learning schedule in mind in the interest of time and money.
 
 ### Backbone Inference
 Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
@@ -111,7 +111,14 @@ Each backbone was trained on the PASCAL VOC2012 dataset. This was done by follow
 <img src=detectron/detectron-visualizations/table.png>
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 </div>
+Some sample pictures that have been inferred based on the models learned are shown below:
+Note that although people seem to be classified as birds and cars as trains, this seems to be a possible mistake with the JSON annotation file as described [here](https://medium.com/@royhuang_87663/detectron-transfer-learning-with-pascal-voc-2007-dataset-73bacf43dfbd).
 
+<div align="center"> <img src="detectron/detectron-visualizations/R-50-FPN/people-pic.jpg" width="700px" /> <p>R-50-FPN model output</p> </div>
+
+<div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/bike_pic.jpg" width="700px" /> <p>R-101-FPN model output 1.</p> </div>
+
+<div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/car.jpg" width="700px" /> <p>R-101-FPN model output 2.</p> </div>
 ### Resnet vs. VGG vs. Inception
 <p align="center">
 <img src="detectron/detectron-visualizations/backbone-model.png">
