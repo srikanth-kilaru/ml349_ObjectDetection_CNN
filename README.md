@@ -35,7 +35,9 @@ The modular nature of the Detectron code base enabled us to replace the default 
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Hence we had to turn off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset and PASCAL VOC 2012 is marginal.
 Please see the below table for the Mean Average Precision when Inception was trained and validated on the COCO dataset using the rules of the COCO website.
 
-![coco-ap](detectron/detectron-visualizations/Coco_AP.png)
+<div align="center">
+<img src="detectron/detectron-visualizations/Coco_AP.png">
+</div>
 
 Here is a list of files added and changed in the Detectron code base -
 
