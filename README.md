@@ -105,6 +105,29 @@ Also, we made a firewall rule in the GCP to allow communication between the serv
 For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone on some test images provided by Detectron as well as an image we randomly found online. We ran the code shown under option 1 [here](/detectron/GETTING_STARTED.md). The result which correctly classified a number of people, a tie, a car, and a chair can be seen below.
 ![rand-test](detectron/detectron-visualizations/people_ex.png)
 
+## Backbone Exploration 
+One of our main goals was to investigate the effect of using various backbone network architectures during training and see how the Average Precision values are reflected based off of that. The backbones utilized in this project include both existing ones in the Detectron [package](detectron/README.md) as well as the Google Inception backbone mentioned above. The are listed below:
+- Resnet 50 with FPN head
+- Resnet 50 with C4 head
+- Resnet 101 with FPN head
+- VGG16
+- VGG_CNN_M_1024
+- Google Inception_Resnet_v2
+
+### Dataset Acquisition
+The original goal was to test these backbones on the [Open Images V4](https://storage.googleapis.com/openimages/web/index.html) dataset which boasts:
+- Over 19,500 classes of objects
+- Over 9 million annoated images
+    - 5.65 million training images
+    - 41,620 validation images
+    - 125,436 testing images
+
+This is by far a much bigger dataset with many more categories than the [COCO](http://cocodataset.org/#home) dataset which Detectron uses for their models. Furthermore, the current Detectron algorithm has already been evaluated  on the COCO, PASCAL VOC, and ILSVRC datasets, so training it on Google's Open Image's dataset would be a novel idea to explore.
+
+In order to accomplish this, we needed to get Open Image's annotation files to be in the right format - specifically COCO's [JSON format](http://cocodataset.org/#format-data). This proved to be rather difficult since Open Image's annotations are in csv format and are annotated differently than COCO's. Furthermre, after spending much time following a [tutorial](https://blog.algorithmia.com/deep-dive-into-object-detection-with-open-images-using-tensorflow/) to convert the annotation files into JSON format, we learned that one - the JSON files we obtained were still not in COCO's JSON format, and two - that we also had to watch out for corrupted or missing image/annotation files. It was at this point where we decided to try working with a different dataset that fits COCO's annotation format.
+
+We briefly investigated using the [Cityscapes](https://www.cityscapes-dataset.com/)
+
 ## Resnet vs. VGG vs. Inception
 <p align="center">
 <img src="detectron/detectron-visualizations/backbone-model.png">
