@@ -123,12 +123,13 @@ Note that although people seem to be classified as birds and cars as trains, thi
 <div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/car.jpg" width="700px" /> <p>R-101-FPN model output 2.</p> </div>
 
 In order to perform your own inference on images, feel free to download the models here:
-- [Resnet 50 with FPN head](https://drive.google.com/open?id=1rEBUyValhBAchmIzn7Xwfs1c_ydTpmB3) - 8 GPU
-- [Resnet 50 with C4 head](https://drive.google.com/open?id=1hpdHNJNiYOaQd2cKtCg10Tu2b2Fc_v6h) - 8 GPU
-- [Resnet 101 with FPN head](https://drive.google.com/open?id=1qhVxTyXG7jmVTyoA9CagCvmgoyFB69rB) - 8 GPU
-- [VGG16](https://drive.google.com/open?id=1juPFrLJx3K0K90DY6bmvC38QM7yaoDYE) - 8 GPU
-- [VGG_CNN_M_1024](https://drive.google.com/open?id=11OyeWHPlYmt0GpBpePCLeG0c3sRSWnb0) - 8 GPU
+- [Resnet 50 with FPN head](https://drive.google.com/open?id=1rEBUyValhBAchmIzn7Xwfs1c_ydTpmB3)
+- [Resnet 50 with C4 head](https://drive.google.com/open?id=1hpdHNJNiYOaQd2cKtCg10Tu2b2Fc_v6h)
+- [Resnet 101 with FPN head](https://drive.google.com/open?id=1qhVxTyXG7jmVTyoA9CagCvmgoyFB69rB)
+- [VGG16](https://drive.google.com/open?id=1juPFrLJx3K0K90DY6bmvC38QM7yaoDYE)
+- [VGG_CNN_M_1024](https://drive.google.com/open?id=11OyeWHPlYmt0GpBpePCLeG0c3sRSWnb0)
 - [Google Inception_Resnet_v2](https://drive.google.com/open?id=1fkdM9ON43CthyOvMXvNWtglXN7Qnj_yc)
+
 Follow the instructions [here](detectron/GETTING_STARTED.md) to perform the inference.
 
 ### Resnet vs. VGG vs. Inception
