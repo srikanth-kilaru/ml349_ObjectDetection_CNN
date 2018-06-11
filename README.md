@@ -160,9 +160,9 @@ From the [Deep Residual Learning for Image Recognition](https://www.cv-foundatio
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition (CVPR)](https://youtu.be/C6tLw-rPQ2o), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased (figure above to the right).
 Thus, it would be logical to assume that for the 5 different backbones mentioned above, ResNet-101 should be a bit better than ResNet-50, which should outperform Inception which should beat VGG_M_CNN_1024, leaving VGG_16 in last place.
 <div align="center"> 
-![table](detectron/detectron-visualizations/table.png)
-![map](detectron/detectron-visualizations/Pascal_mAP.png)
-![backbone-plot](detectron/detectron-visualizations/plot.png)
+<img src=detectron/detectron-visualizations/table.png>
+<img src="detectron/detectron-visualizations/Pascal_mAP.png">
+<img src="detectron/detectron-visualizations/plot.png">
 </div>
 From the data shown above, this trend can be clearly seen to a certain extent. Both ResNet-50-FPN and ResNet-101-FPN are higher than the other backbones. Inception is in third placed followed by the two VGGs in the order we predicted. Furthermore, the ResNet-50-C4 backbone (called 'C4' as features were extracted from the final convolutional layer of the 4th stage) ranked the least among the ResNet models according to the [Mask R-CNN](https://arxiv.org/pdf/1703.06870.pdf) paper by Kaiming He, et al which can be seen in the plot above as well. The only oddity is that ResNet-101-FPN is not higher than ResNet-50_FPN. Perhaps, if the models had more time to train, this phenomenon would not have occured.
 
