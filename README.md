@@ -1,5 +1,6 @@
 # Object Detection and Segmentation using different Backbone Architectures and training Datasets
 **Team Members: Srikanth Kilaru, Michael Wiznitzer, Solomon Wiznitzer**
+Email Addresses: srikanthkilaru2018@u.northwestern.edu, michaelwiznitzer2018@u.northwestern.edu, solomonwiznitzer2018@u.northwestern.edu
 
 Northwestern University EECS 349: Machine Learning (Spring 2018)
 
@@ -16,7 +17,7 @@ We leveraged the modular nature of the Detectron code base to replace the defaul
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person's keypoints are almost blended with motorcycle and the segment mask seems to fit the the typical human frame starting from head/helmet down.</p> </div>
 
 ### Results
-Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [the inception-inference-coco folder](detectron/detectron-visualizations/inception-inference-coco). 
+Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be inferred at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [the inception-inference-coco folder](detectron/detectron-visualizations/inception-inference-coco). Regarding the other backbones, ResNet-FPN performed the best followed by Inception and then the VGG models.
 
 
 ## Further background and Detailed Report
@@ -103,7 +104,7 @@ Finally, the config files were made for each backbone which are linked below:
 - [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
 - [Google Inception_Resnet_v2](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
 
-The backbone config files were made for training, keeping a short learning schedule in mind in the interest of time and money. Hence, the quality of the inference detection of the models, as shown by the example images in the next section, was fairly low.
+The backbone config files were setup to train from scratch with no initial weights - keeping a short learning schedule in mind in the interest of time and money. This was done so that each model could be equally compared against each other without any bias. Hence, the quality of the inference detection of the models, as shown by the example images in the next section, was fairly low. Given more training time, the models would most likely have done better.
 
 ### Backbone Inference
 Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
