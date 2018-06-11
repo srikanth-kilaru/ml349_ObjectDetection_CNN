@@ -12,7 +12,7 @@ We leveraged the modular nature of the Detectron code base to replace the defaul
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person's keypoints are almost blended with motorcycle and the segment mask seems to fit the the typical human frame starting from head/helmet down.</p> </div>
 
 ### Results
-Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [this folder](detectron/detectron-visualizations/inception-inference-coco). 
+Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the detection threshold for bounding boxes, from a default of 0.7 to 0.3. In addition, the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference. Please see sample results from inference below. For a more complete list of inferences based on Inception model, please see [the inception-inference-coco folder](detectron/detectron-visualizations/inception-inference-coco). 
 
 
 ## Further background and Detailed Report
@@ -24,24 +24,24 @@ convolutional features with the main detection network (also refered to as the '
 
 A further enhancement made in the last 18 months was the development of the FPN. 
 Feature pyramids are a basic component in recognition systems for detecting objects at different scales. But many deep learning object detectors have avoided pyramid representations, in part because they are compute and memory
-intensive. But the FAIR team exploits the inherent multi-scale pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. A topdown architecture with lateral connections is developed for
+intensive. But the FAIR team exploits the inherent multi-scale pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. A top down architecture with lateral connections is developed for
 building high-level semantic feature maps at all scales. This architecture is called a Feature Pyramid Network (FPN), and it has shown significant improvement as a generic feature extractor in several applications.
 
 The modular nature of the Detectron code base enabled us to replace the default backbone from ResNet50 / ResNet101 to a VGG or any other backbone that is not
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Hence we had to turn off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset and PASCAL VOC 2012 is marginal.
 Please see the below table for the Mean Average Precision when Inception was trained and validated on the COCO dataset using the rules of the COCO website.
 
-Here is a list of files added and changed in the Detectron code base-
+Here is a list of files added and changed in the Detectron code base -
 
-8 GPU version of the config YAML file [ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
+- 8 GPU version of the config YAML file [ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
-8 GPU version of the config YAML file [ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
+- 8 GPU version of the config YAML file [ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
-Main file with Inception Conv layers [Inception_ResNetv2.py](detectron/detectron/modeling/Inception_ResNetv2.py)
+- Main file with Inception Conv layers [Inception_ResNetv2.py](detectron/detectron/modeling/Inception_ResNetv2.py)
 
-Code that calls the function to add Inception Conv layers[model_builder.py](detectron/detectron/modeling/model_builder.py)
+- Code that calls the function to add Inception Conv layers[model_builder.py](detectron/detectron/modeling/model_builder.py)
 
-For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
+- For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Detectron+Inception output showing persons and a car</p> </div>
