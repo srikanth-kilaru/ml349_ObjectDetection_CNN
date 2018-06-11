@@ -96,29 +96,41 @@ The PASCAL VOC dataset consists of 20 categories listed below, made up of traini
 In order to make these images available to Detectron to be used for training, the images, annotations, and VOCdevkit 2012 directories were structured as described in Detectron's dataset [Readme](https://github.com/facebookresearch/Detectron/tree/master/detectron/datasets/data).
 
 Finally, the config files were made for each backbone which are linked below:
-- [Resnet 50 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-50-FPN.yaml) - 8 GPU
-- [Resnet 50 with C4 head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-50-C4.yaml) - 8 GPU
-- [Resnet 101 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_R-101-FPN.yaml) - 8 GPU
-- [VGG16](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_VGG_16.yaml) - 8 GPU
-- [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
+- [Resnet 50 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-FPN.yaml) - 8 GPU
+- [Resnet 50 with C4 head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-C4.yaml) - 8 GPU
+- [Resnet 101 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-101-FPN.yaml) - 8 GPU
+- [VGG16](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_16.yaml) - 8 GPU
+- [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
 - [Google Inception_Resnet_v2](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
 
-The existing backbone config files were made for training keeping a short learning schedule in mind in the interest of time and money.
+The backbone config files were made for training, keeping a short learning schedule in mind in the interest of time and money. Hence, the quality of the inference detection of the models, as shown by the example images in the next section, was fairly low.
 
 ### Backbone Inference
 Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
+
 <div align="center"> 
 <img src="detectron/detectron-visualizations/table.png">
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 </div>
+
 Some sample pictures that have been inferred based on the models learned are shown below:
-Note that although people seem to be classified as birds and cars as trains, this seems to be a possible mistake with the JSON annotation file as described [here](https://medium.com/@royhuang_87663/detectron-transfer-learning-with-pascal-voc-2007-dataset-73bacf43dfbd).
+Note that although people seem to be classified as birds and cars as trains, this seems to be a possible mistake with the JSON annotation file as described [here](https://medium.com/@royhuang_87663/detectron-transfer-learning-with-pascal-voc-2007-dataset-73bacf43dfbd). 
 
 <div align="center"> <img src="detectron/detectron-visualizations/R-50-FPN/people-pic.jpg" width="700px" /> <p>R-50-FPN model output</p> </div>
 
 <div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/bike_pic.jpg" width="700px" /> <p>R-101-FPN model output 1.</p> </div>
 
 <div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/car.jpg" width="700px" /> <p>R-101-FPN model output 2.</p> </div>
+
+In order to perform your own inference on images, feel free to download the models here:
+- [Resnet 50 with FPN head](https://drive.google.com/open?id=1rEBUyValhBAchmIzn7Xwfs1c_ydTpmB3) - 8 GPU
+- [Resnet 50 with C4 head](https://drive.google.com/open?id=1hpdHNJNiYOaQd2cKtCg10Tu2b2Fc_v6h) - 8 GPU
+- [Resnet 101 with FPN head](https://drive.google.com/open?id=1qhVxTyXG7jmVTyoA9CagCvmgoyFB69rB) - 8 GPU
+- [VGG16](https://drive.google.com/open?id=1juPFrLJx3K0K90DY6bmvC38QM7yaoDYE) - 8 GPU
+- [VGG_CNN_M_1024](https://drive.google.com/open?id=11OyeWHPlYmt0GpBpePCLeG0c3sRSWnb0) - 8 GPU
+- [Google Inception_Resnet_v2](https://drive.google.com/open?id=1fkdM9ON43CthyOvMXvNWtglXN7Qnj_yc)
+Follow the instructions [here](detectron/GETTING_STARTED.md) to perform the inference.
+
 ### Resnet vs. VGG vs. Inception
 <p align="center">
 <img src="detectron/detectron-visualizations/backbone-model.png">
