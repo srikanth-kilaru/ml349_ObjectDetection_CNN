@@ -49,7 +49,7 @@ Here is a list of files added and changed in the Detectron code base -
 
 - Code that calls the function to add Inception Conv layers[model_builder.py](detectron/detectron/modeling/model_builder.py)
 
-- For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/drive/u/1/folders/1xbAswP6qGhcqYj-77Ty_0NuD7sFUh_f3)
+- For your own inference you can download the weights trained using Inception on COCO dataset - [inception_coco_model_final.pkl](https://drive.google.com/open?id=1NYyg7rPIKq-yh90Yk7PVPj1RHs2yPzxD)
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Detectron+Inception output showing persons and a car</p> </div>
