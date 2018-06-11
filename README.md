@@ -28,9 +28,12 @@ The modular nature of the Detectron code base enabled us to replace the default 
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Therefore we turned off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset is marginal.
 
 Some sample images with object detection and segmentation working correctly -
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg.pdf" width="700px" /> <p>Example 1: Mask R-CNN output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Mask R-CNN output.</p> </div>
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/24274813513_0cfd2ce6d0_k.jpg.pdf" width="700px" /> <p>Example 2: Mask R-CNN output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Mask R-CNN output.</p> </div>
+
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 3: Mask R-CNN output.</p> </div>
+
 
 ## Setup and Installation
 
