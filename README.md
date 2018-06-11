@@ -108,7 +108,7 @@ The existing backbone config files were made for training keeping a short learni
 ### Backbone Inference
 Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
 <div align="center"> 
-<img src=detectron/detectron-visualizations/table.png>
+<img src="detectron/detectron-visualizations/table.png">
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 </div>
 Some sample pictures that have been inferred based on the models learned are shown below:
