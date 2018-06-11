@@ -71,7 +71,7 @@ Also, we made a firewall rule in the GCP to allow communication between the serv
 ### Initial Test
 
 For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone on some test images provided by Detectron as well as an image we randomly found online. We ran the code shown under option 1 [here](/detectron/GETTING_STARTED.md). The result which correctly classified a number of people, a tie, a car, and a chair can be seen below.
-![rand-test](images/people_ex.png)
+![rand-test](detectron/detectron-visualizations/people_ex.png)
 ## Streams 1 and 2
 
 ### <u>Stream 1</u>
