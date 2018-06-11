@@ -30,13 +30,13 @@ The modular nature of the Detectron code base enabled us to replace the default 
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Therefore we turned off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset is marginal.
 Here is a list of files added and changed in the Detectron code base-
 
-[ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs)
+[ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
-[ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs)
+[ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
-[Inception_ResNetv2.py](detectron/detectron/modeling)
+[Inception_ResNetv2.py](detectron/detectron/modeling/Inception_ResNetv2.py)
 
-[model_builder.py](detectron/detectron/modeling)
+[model_builder.py](detectron/detectron/modeling/model_builder.py)
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person is almost blended with motorcycle.</p> </div>
