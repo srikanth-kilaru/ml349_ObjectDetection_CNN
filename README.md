@@ -41,7 +41,7 @@ Please see the below table for the Mean Average Precision when Inception was tra
 
 Here is a list of files added and changed in the Detectron code base -
 
-- 8 GPU version of the config YAML file [ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
+- 2 GPU version of the config YAML file [ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
 - 8 GPU version of the config YAML file [ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
