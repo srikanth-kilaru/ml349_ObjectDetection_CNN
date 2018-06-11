@@ -99,10 +99,10 @@ For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone
 
 From the[Deep Residual Learning for Image Recognition](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf) paper by Kaiming He, et al, the authors describe that in theory, a neural network should have reduced training error as the number of layers inrease. This is because  increased depth enables the network more opportunity to learn complex features. While this is true to a certain extent (VGG16 outperforms an AlexNet due to having multiple layers of 3x3 convolution filters), it is not completely accurate. Rather, a 'plain' network (similar to VGG) tends to increase in training error if the number of layers is too big. In contrast, training error continues to decrease as the number of layers increase by ResNet. To achieve this, a 'shortcut' is created between an input to a hidden layer and right before an output a second layer down (as shown in the image below).
 
-<p align="center">
+<div>
 <img src="detectron/detectron-visualizations/residual.png">
 <img src="detectron/detectron-visualizations/resnet-comparison.jpeg">
-</p>
+</div>
 
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition (CVPR)](https://youtu.be/C6tLw-rPQ2o), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased (figure above to the right).
 Thus, it would be logical to assume that for the 5 different backbones mentioned above, ResNet-101 should be a bit better than ResNet-50, which should outperform Inception which should beat VGG_M_CNN_1024, leaving VGG_16 in last place. From the data shown, this trend can be clearly seen to a certain extent. Both ResNet-50 and ResNet-101 are higher than the other backbones. Inception is in third placed followed by the two VGGs in the order we predicted. The only oddity is that ResNet-101 is not higher than ResNet-50. Perhaps, if the models had more time to train, this phenomenon would not have occured.
