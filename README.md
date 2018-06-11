@@ -14,7 +14,7 @@ We leveraged the modular nature of the Detectron code base to replace the defaul
 Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the (srikanth fill the right word here) thresh, from a default of 0.7 to 0.3, and the keypoint threshold from a default of 2 to 0. This shows that the algorithm is tuned to throw away low qaulity inferences. In addition the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference.
 
 
-## Further background
+## Further background and Detailed Report
 
 Deep Learning (CNN) architectures such as AlexNet, VGG, Resnet and Inception have proven to be very successful in image classification tasks. However they were not particularly useful for object detection. A key advance in the area of object detection and segmentation has been the work done by some researchers who now work at Facebook.
 
@@ -43,6 +43,11 @@ Some sample images with object detection and segmentation NOT working correctly 
 Some sample images with object detection and segmentation working very marginally or missing detection of significant (number of) objects in the image -
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 1: Detectron output.</p> </div>
+
+For trying out inference with your own set of images, you can use the weights from the trained model located at ().
+
+## Future Work
+In the future we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
 
 ## Setup and Installation Instructions
 
