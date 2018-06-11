@@ -1,18 +1,20 @@
-# Instant Object Segmentation and Detection using different Backbone Architectures
+# Object Detection and Segmentation using different Backbone Architectures and training Datasets
 **Team Members: Srikanth Kilaru, Michael Wiznitzer, Solomon Wiznitzer**
 
 Northwestern University ME 349: Machine Learning (Spring 2018)
 
 ## Abstract
 
-Object detection is the process of finding instances of real-world objects such as faces, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. It is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry.
+Object detection is the process of finding instances of real-world objects such as faces, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. It is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry. Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
 
-Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
-The modular nature of the Detectron code base enabled us to replace the default backbone from ResNet50 / ResNet101 to a VGG or any other backbone that is not
-already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo and tested the object detection capabilities of the model when trained on the PASCAL VOC 2012 & MS COCO dataset is marginal.
-When the inference script is run on an input image, the image is overlaid with segmented masks and a bounding box of the object instances along with their classification and associated confidence level.
+## Task
+We leveraged the modular nature of the Detectron code base to replace the default backbone from ResNet50 / ResNet101 to a backbone that is not already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 CNN to the model zoo, which was implemented in python utilizing Caffe2, and tested the object detection and segmentation capabilities of the model when trained on the PASCAL VOC 2012 & MS COCO dataset. Inference produces images that are overlaid with segmentation mask and bounding box of the object instances along with their classification and associated confidence level.
 
-### Further background
+## Results
+Detectron with Inception as a backbone did not perform as well as with Resnet. Some of the images could not be infered at all, even incorrectly, after lowering the (srikanth fill the right word here) thresh, from a default of 0.7 to 0.3, and the keypoint threshold from a default of 2 to 0. This shows that the algorithm is tuned to throw away low qaulity inferences. In addition the lack of the FPN feature (please see detailed report) in our testing could have contributed to the low accuracy of the inference.
+
+
+## Further background
 
 Deep Learning (CNN) architectures such as AlexNet, VGG, Resnet and Inception have proven to be very successful in image classification tasks. However they were not particularly useful for object detection. A key advance in the area of object detection and segmentation has been the work done by some researchers who now work at Facebook.
 
@@ -42,11 +44,11 @@ Some sample images with object detection and segmentation working very marginall
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 1: Detectron output.</p> </div>
 
-## Setup and Installation
+## Setup and Installation Instructions
 
-### Google Cloud Platform (GCP)
+### Setting up the GPU enabled VM on Google Cloud Platform (GCP)
 
-One of the requirements to use Detectron is a NVIDIA GPU. To gain access to this resource, we each created free accounts on [Google Cloud](https://cloud.google.com/) using our *personal* email addresses and credit cards. Unfortunately, the free version (although it does give $300 credit for the first year) does not allow access to GPUs so we upgraded our accounts. We then followed the instructions [here](https://cloud.google.com/compute/quotas) to get access to 8 K80 GPUs.
+One of the requirements of Detectron is to use a machine with NVIDIA GPUs. To gain access to this resource, we each created free accounts on [Google Cloud](https://cloud.google.com/) using our *personal* email addresses and credit cards. Unfortunately, the free version (although it does give $300 credit for the first year) does not allow access to GPUs so we upgraded our accounts, albeit at no up front charge. We then followed the instructions [here](https://cloud.google.com/compute/quotas) to get access to 8 up to K80 GPUs.
 
 After creating a project, we then made a VM Instance with the following settings:
 * **Zone:** us-central or us-west
