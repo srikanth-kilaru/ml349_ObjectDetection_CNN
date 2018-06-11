@@ -112,7 +112,7 @@ Each backbone was trained on the PASCAL VOC2012 dataset. This was done by follow
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 </div>
 
-## Resnet vs. VGG vs. Inception
+### Resnet vs. VGG vs. Inception
 <p align="center">
 <img src="detectron/detectron-visualizations/backbone-model.png">
 </p>
@@ -135,7 +135,7 @@ From the data shown above, this trend can be clearly seen to a certain extent. B
 This project exposed us to the inner working of how world class CNNs are actually implemented especially using Deep Learning frameworks for GPU enabled machines like Caffe.
 In the future, we would like to rewrite the interface between FPN and non-ResNet backbones so that it is much easier to plug in these backbones without giving up FPN functionality. This would enable us to do a fair comaprison with the results published by the FAIR team.
 
-### Setting up the GPU enabled VM on Google Cloud Platform (GCP)
+## Setting up the GPU enabled VM on Google Cloud Platform (GCP)
 
 One of the requirements of Detectron is to use a machine with NVIDIA GPUs. To gain access to this resource, we each created free accounts on [Google Cloud](https://cloud.google.com/) using our *personal* email addresses and credit cards. Unfortunately, the free version (although it does give $300 credit for the first year) does not allow access to GPUs so we upgraded our accounts, albeit at no up front charge. We then followed the instructions [here](https://cloud.google.com/compute/quotas) to get access to 8 up to K80 GPUs.
 
