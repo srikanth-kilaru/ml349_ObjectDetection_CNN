@@ -32,7 +32,7 @@ Some sample images with object detection and segmentation working correctly -
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Mask R-CNN output.</p> </div>
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 3: Mask R-CNN output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/15673749081_767a7fa63a_k.jpg" width="700px" /> <p>Example 3: Mask R-CNN output.</p> </div>
 
 
 ## Setup and Installation
