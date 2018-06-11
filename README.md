@@ -99,10 +99,8 @@ For fun, we tested a pretrained Mask R-CNN model using a ResNet-101-FPN backbone
 
 From the[Deep Residual Learning for Image Recognition](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf) paper by Kaiming He, et al, the authors describe that in theory, a neural network should have reduced training error as the number of layers inrease. This is because  increased depth enables the network more opportunity to learn complex features. While this is true to a certain extent (VGG16 outperforms an AlexNet due to having multiple layers of 3x3 convolution filters), it is not completely accurate. Rather, a 'plain' network (similar to VGG) tends to increase in training error if the number of layers is too big. In contrast, training error continues to decrease as the number of layers increase by ResNet. To achieve this, a 'shortcut' is created between an input to a hidden layer and right before an output a second layer down (as shown in the image below).
 
-<p align="left">
+<p align="center">
 <img src="detectron/detectron-visualizations/residual.png">
-</p>
-<p align="right">
 <img src="detectron/detectron-visualizations/resnet-comparison.jpeg">
 </p>
 
