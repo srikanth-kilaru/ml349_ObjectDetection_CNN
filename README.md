@@ -7,13 +7,12 @@ Northwestern University ME 349: Machine Learning (Spring 2018)
 
 Object detection is the process of finding instances of real-world objects such as faces, bicycles, and buildings in images or videos. Object detection algorithms typically use extracted features and learning algorithms to recognize instances of an object category. It is commonly used in applications such as image retrieval, robotics, security, surveillance, and advanced driver assistance systems (ADAS). Object detection and segmentation is an area of significant R&D activity in both academia and industry.
 
-Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron.
-In the interest of attracting more users and contributors for these algorithms, Facebook has open sourced their work under the project code name Detectron.
+Facebook AI Research (FAIR) Labs open sourced their latest object detection and segmentation algorithm, code named Detectron, in the interest of attracting more users and contributors for these algorithms.
 The modular nature of the Detectron code base enabled us to replace the default backbone from ResNet50 / ResNet101 to a VGG or any other backbone that is not
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo and tested the object detection capabilities of the model when trained on the PASCAL VOC 2012 & MS COCO dataset is marginal.
 When the inference script is run on an input image, the image is overlaid with segmented masks and a bounding box of the object instances along with their classification and associated confidence level.
 
-###Further background
+### Further background
 
 Deep Learning (CNN) architectures such as AlexNet, VGG, Resnet and Inception have proven to be very successful in image classification tasks. However they were not particularly useful for object detection. A key advance in the area of object detection and segmentation has been the work done by some researchers who now work at Facebook.
 
@@ -25,10 +24,13 @@ Feature pyramids are a basic component in recognition systems for detecting obje
 intensive. But the FAIR team exploits the inherent multi-scale pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. A topdown architecture with lateral connections is developed for
 building high-level semantic feature maps at all scales. This architecture is called a Feature Pyramid Network (FPN), and it has shown significant improvement as a generic feature extractor in several applications.
 
-In the interest of attracting more users and contributors for these algorithms, Facebook has open sourced their work under the project code name Detectron.
 The modular nature of the Detectron code base enabled us to replace the default backbone from ResNet50 / ResNet101 to a VGG or any other backbone that is not
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Therefore we turned off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset is marginal.
 
+Some sample images with object detection and segmentation working correctly -
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg.pdf" width="700px" /> <p>Example 1: Mask R-CNN output.</p> </div>
+
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/24274813513_0cfd2ce6d0_k.jpg.pdf" width="700px" /> <p>Example 2: Mask R-CNN output.</p> </div>
 
 ## Setup and Installation
 
