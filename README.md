@@ -4,8 +4,8 @@
 Northwestern University EECS 349: Machine Learning (Spring 2018)
 
 ## Primary Areas of contribution
-Srikanth Kilaru - Adding Inception backbone to Detectron
-Michael & Solomon Wiznitzer - Training six different backbones and comparing results
+- Srikanth Kilaru - Adding Inception backbone to Detectron
+- Michael & Solomon Wiznitzer - Training six different backbones and comparing results
 
 ## Abstract
 
@@ -102,6 +102,14 @@ Finally, the config files were made for each backbone which are linked below:
 - [Google Inception_Resnet_v2](detectron/configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
 
 The existing backbone config files were made keeping a short learning schedule in mind in the interest of time and money.
+
+### Backbone Inference
+Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
+<div align="center"> 
+<img src=detectron/detectron-visualizations/table.png>
+<img src="detectron/detectron-visualizations/Pascal_mAP.png">
+<img src="detectron/detectron-visualizations/plot.png">
+</div>
 
 ## Resnet vs. VGG vs. Inception
 <p align="center">
