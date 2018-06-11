@@ -30,19 +30,19 @@ The modular nature of the Detectron code base enabled us to replace the default 
 already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Therefore we turned off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset is marginal.
 
 Some sample images with object detection and segmentation working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/motorcycles-race-helmets-pilots-163210.jpeg" width="700px" /> <p>Example 1: Detectron+Inception output has low confidence of person but detects it anyway. Low confidence is probably due to person is almost blended with motorcycle.</p> </div>
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Detectron output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/24274813513_0cfd2ce6d0_k.jpg" width="700px" /> <p>Example 2: Detectron+Inception output showing persons and a car</p> </div>
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/15673749081_767a7fa63a_k.jpg" width="700px" /> <p>Example 3: Detectron output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/15673749081_767a7fa63a_k.jpg" width="700px" /> <p>Example 3: Detectron+Inception output showing several persons on the deck but misses the boats</p> </div>
 
 Some sample images with object detection and segmentation NOT working correctly when Detectron uses the Inception backbone and is trained on the MS COCO dataset -
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/16004479832_a748d55f21_k.jpg" width="700px" /> <p>Example 1: Detectron output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/16004479832_a748d55f21_k.jpg" width="700px" /> <p>Example 4: Detectron+Inception output with poor detection. It however detects the lower part of the person</p> </div>
 
 Some sample images with object detection and segmentation working very marginally or missing detection of significant (number of) objects in the image -
 
-<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 1: Detectron output.</p> </div>
+<div align="center"> <img src="detectron/detectron-visualizations/inception-inference/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 5: Detectron+Inception output missing several key points including people, automobiles and cycles. It gets a portion of the motorcycle right</p> </div>
 
 For trying out inference with your own set of images, you can use the weights from the trained model located at ().
 
