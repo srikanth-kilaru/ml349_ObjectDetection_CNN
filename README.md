@@ -27,7 +27,7 @@ Deep Learning (CNN) architectures such as AlexNet, VGG, Resnet and Inception hav
 To increase the accuracy and performance of object detection algorithms, these researchers, introduced a Region of Interest (ROI) Proposal Network (RPN) that shares full-image
 convolutional features with the main detection network (also refered to as the 'backbone'), thus enabling nearly cost-free region proposals. An RPN is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position. The RPN is trained end-to-end to generate high-quality region proposals, and then merge the RPN and CNN into a single network by sharing their convolutional features. The RPN portion tells the unified network where to look.
 
-A further enhancement made in the last 18 months was the development of the FPN. 
+A further enhancement made in the last 18 months was the development of the FPN.
 Feature pyramids are a basic component in recognition systems for detecting objects at different scales. But many deep learning object detectors have avoided pyramid representations, in part because they are compute and memory
 intensive. But the FAIR team exploits the inherent multi-scale pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. A top down architecture with lateral connections is developed for
 building high-level semantic feature maps at all scales. This architecture is called a Feature Pyramid Network (FPN), and it has shown significant improvement as a generic feature extractor in several applications.
@@ -65,7 +65,7 @@ Some sample images with object detection and segmentation working very marginall
 
 <div align="center"> <img src="detectron/detectron-visualizations/inception-inference-coco/17790319373_bd19b24cfc_k.jpg" width="700px" /> <p>Example 5: Detectron+Inception output missing several key points including people, automobiles and cycles. It gets a portion of the motorcycle right</p> </div>
 
-## Backbone Exploration 
+## Backbone Exploration
 One of our main goals was to investigate the effect of using various backbone network architectures during training and see how the Average Precision values are reflected based off of that. The backbones utilized in this project include both existing ones in the Detectron [package](detectron/README.md) as well as the Google Inception backbone mentioned above. The are listed below:
 - Resnet 50 with FPN head
 - Resnet 50 with C4 head
@@ -97,25 +97,27 @@ The PASCAL VOC dataset consists of 20 categories listed below, made up of traini
 In order to make these images available to Detectron to be used for training, the images, annotations, and VOCdevkit 2012 directories were structured as described in Detectron's dataset [Readme](https://github.com/facebookresearch/Detectron/tree/master/detectron/datasets/data).
 
 Finally, the config files were made for each backbone which are linked below:
-- [Resnet 50 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-FPN.yaml) - 8 GPU
-- [Resnet 50 with C4 head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-C4.yaml) - 8 GPU
-- [Resnet 101 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-101-FPN.yaml) - 8 GPU
-- [VGG16](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_16.yaml) - 8 GPU
-- [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_CNN_M_1024.yaml) - 8 GPU
-- [Google Inception_Resnet_v2](detectron/configs/ml349_configs/ml349_2gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)- 2 GPU
+- [Resnet 50 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-FPN.yaml)
+- [Resnet 50 with C4 head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-50-C4.yaml)
+- [Resnet 101 with FPN head](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_R-101-FPN.yaml)
+- [VGG16](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_16.yaml)
+- [VGG_CNN_M_1024](detectron/configs/ml349_configs/ml349_8gpu_e2e_mask_rcnn_VGG_CNN_M_1024.yaml)
+- [Google Inception_Resnet_v2](detectron/configs/ml349_configs/ml349_8gpu_e2e_faster_rcnn_Inception_ResNetv2.yaml)
 
-The backbone config files were setup to train from scratch with no initial weights - keeping a short learning schedule in mind in the interest of time and money. This was done so that each model could be equally compared against each other without any bias. Hence, the quality of the inference detection of the models, as shown by the example images in the next section, was fairly low. Given more training time, the models would most likely have done better.
+The backbone config files were setup to train from scratch using 8 GPU and with no initial weights - keeping a short learning schedule in mind in the interest of time and money. This was done so that each model could be equally compared against each other without any bias. Hence, the quality of the AP values and inference detection of the models, as shown by the table and example images in the next section, was fairly low. Given more training time, the models would most likely have done better.
 
 ### Backbone Inference
 Each backbone was trained on the PASCAL VOC2012 dataset. This was done by following the instructions on Detectron's [Readme](detectron/GETTING_STARTED.md). The results are shown in the table below:
 
-<div align="center"> 
+<div align="center">
 <img src="detectron/detectron-visualizations/table.png">
 <img src="detectron/detectron-visualizations/Pascal_mAP.png">
 </div>
 
+As can be seen from the table, the categories with the best AP values for all backbones include Aeroplane, Bus, and Person which is consistent with the results of the VOC2012 challenge which can be seen [here](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/results/index.html). From the mAP values shown, the backbones can be ranked from best to worst as R-50-FPN, R-101-FPN, Inception_Resnet_v2, VGG_CNN_M_1024, VGG_16, and R-50-C4. An analysis of these results will take place in the next section.
+
 Some sample pictures that have been inferred based on the models learned are shown below:
-Note that although people seem to be classified as birds and cars as trains, this seems to be a possible mistake with the JSON annotation file as described [here](https://medium.com/@royhuang_87663/detectron-transfer-learning-with-pascal-voc-2007-dataset-73bacf43dfbd). 
+Note that although people seem to be classified as birds and cars as trains, this seems to be a possible mistake with the JSON annotation file as described [here](https://medium.com/@royhuang_87663/detectron-transfer-learning-with-pascal-voc-2007-dataset-73bacf43dfbd).
 
 <div align="center"> <img src="detectron/detectron-visualizations/R-50-FPN/people-pic.jpg" width="700px" /> <p>R-50-FPN model output</p> </div>
 
@@ -148,7 +150,7 @@ From the [Deep Residual Learning for Image Recognition](https://www.cv-foundatio
 Not only does this address the vanishing gradient issue to a certain extent (since an output layer will at the very least be equal to its previous residual), it also allows the network to set weights to equal zero if the residual is optimal or set the weights to find small fluctations around the residual (a.k.a the identity). Furthermore, at the [2016 Conference on Computer Vision and Pattern Recognition (CVPR)](https://youtu.be/C6tLw-rPQ2o), He showed that as the layers of ResNets increased, the percent error on the ImageNet dataset decreased (figure above to the right).
 Thus, it would be logical to assume that for the 5 different backbones mentioned above, ResNet-101 should be a bit better than ResNet-50, which should outperform Inception which should beat VGG_M_CNN_1024, leaving VGG_16 in last place.
 
-<div align="center"> 
+<div align="center">
 <img src="detectron/detectron-visualizations/plot.png">
 </div>
 
@@ -168,7 +170,7 @@ After creating a project, we then made a VM Instance with the following settings
     * *Cores:* 4 vCPUs
     * *Memory:* 20 GB memory
     * *GPU:* 1,2, or 8 K80 GPUS
-* **Boot Disk:** 
+* **Boot Disk:**
     * *OS Image:* Ubuntu 16.04 LTS
     * *Boot Disk Type:* Standard persistent disk
     * *Size:* 500 GB
