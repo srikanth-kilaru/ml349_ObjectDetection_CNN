@@ -34,7 +34,7 @@ intensive. But the FAIR team exploits the inherent multi-scale pyramidal hierarc
 building high-level semantic feature maps at all scales. This architecture is called a Feature Pyramid Network (FPN), and it has shown significant improvement as a generic feature extractor in several applications.
 
 The modular nature of the Detectron code base enabled us to replace the default backbone from ResNet50 / ResNet101 to a VGG or any other backbone that is not
-already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models(like VGG and Inception) to the FPN. Hence we had to turn off the FPN feature when testing the Inception module. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset and PASCAL VOC 2012 is marginal.
+already provided in their 'model zoo'. We added a new backbone, the Google Inception_ResNet_v2 to the model zoo. The way the FPN feature part of Detectron is currently developed, it makes it extremely challenging to plugin non-ResNet models (like VGG and Inception) to the FPN. Hence we had to turn off the FPN feature when testing the Inception and VGG modules. Our results show that with a new previously untested backbone and with the FPN off, the object detection capabilities of the model when trained on the MS COCO dataset and PASCAL VOC 2012 is marginal.
 Please see the below table for the Mean Average Precision when Inception was trained and validated on the COCO dataset using the rules of the COCO website.
 
 <div align="center">
@@ -126,7 +126,7 @@ Note that although people seem to be classified as birds and cars as trains, thi
 
 <div align="center"> <img src="detectron/detectron-visualizations/R-101-FPN/car.jpg" width="700px" /> <p>R-101-FPN model output 2.</p> </div>
 
-In order to perform your own inference on images, feel free to download the models here:
+In order to perform your own inference, you can download the weights trained on the PASCAL VOC2012 dataset for each backbone here:
 - [Resnet 50 with FPN head](https://drive.google.com/open?id=1rEBUyValhBAchmIzn7Xwfs1c_ydTpmB3)
 - [Resnet 50 with C4 head](https://drive.google.com/open?id=1hpdHNJNiYOaQd2cKtCg10Tu2b2Fc_v6h)
 - [Resnet 101 with FPN head](https://drive.google.com/open?id=1qhVxTyXG7jmVTyoA9CagCvmgoyFB69rB)
