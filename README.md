@@ -1,6 +1,7 @@
 # Object Detection and Segmentation using different Backbone Architectures and training Datasets
 **Team Members: Srikanth Kilaru, Michael Wiznitzer, Solomon Wiznitzer**
-Email Addresses: srikanthkilaru2018@u.northwestern.edu, michaelwiznitzer2018@u.northwestern.edu, solomonwiznitzer2018@u.northwestern.edu
+
+**Email Addresses**: srikanthkilaru2018@u.northwestern.edu, michaelwiznitzer2018@u.northwestern.edu, solomonwiznitzer2018@u.northwestern.edu
 
 Northwestern University EECS 349: Machine Learning (Spring 2018)
 
